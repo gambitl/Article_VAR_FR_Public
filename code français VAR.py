@@ -178,8 +178,6 @@ df = pd.read_excel(r"C:\Users\victo\Desktop\data VAR.xlsx")
 
 nom_col_date_df = "Date (CEST)"
 df = df.set_index(nom_col_date_df)
-df = df.drop(["Sendout Espagne", "Sendout Portugal"], axis = 1)
-
 
 nom_col = []
 for i in range(1,29):
@@ -194,7 +192,9 @@ dict_col = dict(zip_ite)
 df.rename(columns = dict_col, inplace = True)
 
 # In[9]:
+#On définit la variable cible du modèle
 variable_cible = df["Variable 1"]
+#On récupère l'index du DF qui va nous servir plus tard pour le plotting :)
 date_totale = df.index
 # In[31]:
 #Remplacement NA
@@ -211,6 +211,7 @@ df_pour_var = df.iloc[-5*n_jour_cible:, :]
 test_labels = df_pour_var.iloc[-120:, 0]
 date_du_split = date_totale[-n_jour_cible:]
 
+#Je rajoute ici "1", car parfois la data est égale à 0 pile (time series) et cela fait 
 df_pour_var = df_pour_var +1
 
 #%% In[12]: 
@@ -399,7 +400,7 @@ test_var = df_diff_1[-n_jour_cible:]
 df_granger = grangers_test(df_diff_1, maxlag, variables = df_diff_1.columns)
 
 #Test Git 2ieme
-# In[16]: On va tester ici tous les lags jusqu'au lag max pour l'opti de notre modèle var : peut de temps de calcul super rentable
+# In[16]: On va tester ici tous les lags jusqu'au lag max pour l'opti de notre modèle var : peu de temps de calcul super rentable
 lag = maxlag #On choisi le lag max
 array_mae_var = []
 array_pvalue_normal = []
