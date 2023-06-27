@@ -1,4 +1,4 @@
-                                                                                           #!/usr/bin/env python
+
 # coding: utf-8
 #Dev par Victor Lieutaud
 #Ne pas reproduire sans citer la source :*
